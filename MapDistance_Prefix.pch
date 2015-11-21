@@ -1,0 +1,47 @@
+//
+// Prefix header for all source files of the 'MapDistance' target in the 'MapDistance' project
+//
+
+#define bNSLog(s,...)
+
+#define PI_APPROX 3.14159
+#define RADIUS_OF_EARTH 6378100
+#define FT_PER_METER 3.2808399
+#define MILES_PER_METER 0.000621371192
+#define HEIGHT_OF_DRAW_CPANEL 70
+#define EARTH_AXIAL_TILT_DEGREES 23.439281
+#define METERS_FOR_GREAT_CIRCLE 100000
+#define HEIGHT_OF_DISTANCE_TEXT 20
+
+#define DAYS_TO_WAIT_FOR_REVIEW 5.01
+
+#define CD_DEBUG FALSE
+
+#define MEAN(a, b) ((double)a + (double)b) / ((double) 2)
+
+#define COLOR_TRANSPAR [UIColor colorWithRed:1.00 green:1.00 blue:1.00 alpha:0.0]
+#define COLOR_SCHEME_1 [UIColor colorWithRed:0.46 green:0.80 blue:0.84 alpha:1.0]
+#define COLOR_SCHEME_2 [UIColor colorWithRed:0.00 green:0.00 blue:1.00 alpha:1.0]
+
+#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
+#endif
+
+#import "MKCoordinateRegionWrapper.h"
+
+typedef char* string;
+
+@protocol MapDistanceViewControllerProtocol <NSObject>
+
+-(void)refreshUnits;
+-(void)infoButtonViewCloseButtonPressed;
+-(void)applicationWillResignActive;
+-(void)applicationWillClose;
+-(void)searchResultReturnedLocation:(MKCoordinateRegionWrapper *)_location;
+
+@end

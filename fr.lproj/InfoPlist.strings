@@ -1,0 +1,2 @@
+CFBundleDisplayName = "Carte Outils";
+NSLocationWhenInUseUsageDescription = "Il est plus facile d'utiliser cette application si l'accès de l'emplacement est activé";
