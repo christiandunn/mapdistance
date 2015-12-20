@@ -36,12 +36,14 @@
     
     self = [super initWithFrame:frame];
     if (self) {
+        stateManager = [[MapDistanceCanvasStateManager alloc] init];
+        [stateManager setCanvasStatus:0];
+        
         drawing_path= nil;
 		self.opaque= FALSE;
 		map_moving= 0;
 		user_defaults= [NSUserDefaults standardUserDefaults];
         [user_defaults synchronize];
-		canvas_status= 0;
 		current_device= [UIDevice currentDevice];
         mode = 0;
         area = -1.0;
@@ -261,7 +263,7 @@ void centerTextInContextAtOrigin(
     
     /* Blue line for resuming path drawing */
     double distance_delta = 0.0;
-    if (canvas_status == 1 && drawing_path!=nil && [drawing_path count]>0) {
+    if ([stateManager getCanvasStatus] == 1 && drawing_path!=nil && [drawing_path count]>0) {
         if ([drawing_path count]==1) {
             pt = pt1;
         }
@@ -278,7 +280,7 @@ void centerTextInContextAtOrigin(
     }
     
     /* Little cursor */
-	if (canvas_status==1) {
+	if ([stateManager getCanvasStatus] == 1) {
 		
 		NSInteger x_val= (NSInteger)cursor_pixel.x;
 		NSInteger y_val= (NSInteger)cursor_pixel.y + y_offset;
@@ -307,7 +309,7 @@ void centerTextInContextAtOrigin(
      */
     
     /*
-    if (canvas_status == 2) {
+    if ([stateManager canvasIsEditingPath]) {
         [self calculateDistance];
     }
      */
@@ -377,7 +379,7 @@ void centerTextInContextAtOrigin(
     }
 	
     /* Initialization phase with a y-offset */
-	if (canvas_status==0 && y_offset!=0) {
+	if ([stateManager getCanvasStatus] == 0 && y_offset != 0) {
 		
 		UITouch *input_event= [touches anyObject];
 		
@@ -390,7 +392,7 @@ void centerTextInContextAtOrigin(
 		return;
 	}
     
-    if (canvas_status==1) {
+    if ([stateManager getCanvasStatus]==1) {
 		
 		UITouch *input_event= [touches anyObject];
 		CGPoint cursor_pixel2= [input_event locationInView:self];
@@ -401,9 +403,9 @@ void centerTextInContextAtOrigin(
 	}
 		
     /* If in full on path drawing mode OR no path has been started and there's no y-offset */
-	if (canvas_status==2 || (y_offset==0 && canvas_status==0)) {
+	if ([stateManager canvasIsEditingPath] || (y_offset==0 && [stateManager getCanvasStatus]==0)) {
 		UITouch *input_event= [touches anyObject];
-		canvas_status= 2;
+		[stateManager setCanvasStatus:2];
 				
 		CGPoint pixel_location= [input_event locationInView:self];
 		first_pixel= pixel_location;
@@ -437,7 +439,7 @@ void centerTextInContextAtOrigin(
     NSInteger yOffsetTop = (y_offset < 0) ? - MAP_MARGIN : y_offset;
     NSInteger yOffsetBottom = (y_offset > 0) ? MAP_MARGIN : y_offset;
     
-	if (canvas_status==1) {
+	if ([stateManager getCanvasStatus]==1) {
 		
 		UITouch *input_event= [touches anyObject];
 		CGPoint cursor_pixel2= [input_event locationInView:self];
@@ -447,7 +449,7 @@ void centerTextInContextAtOrigin(
 		[self setNeedsDisplay];
 	}
 	
-	if (canvas_status > 0) {
+	if ([stateManager getCanvasStatus] > 0) {
 		if (map_moving==1) {
 			return;
 		}
@@ -466,7 +468,7 @@ void centerTextInContextAtOrigin(
         cursor_pixel = pixel_location;
 		pixel_location.y= pixel_location.y + y_offset;
 		
-		if (canvas_status > 0 && useAutomaticScroll) {
+		if ([stateManager getCanvasStatus] > 0 && useAutomaticScroll) {
 			//Move the map if necessary
             CLLocationCoordinate2D newMapCenterCoordinate;
             double newMapCenterLatitude;
@@ -503,7 +505,7 @@ void centerTextInContextAtOrigin(
             }
 		}
 
-        if (canvas_status == 2) {
+        if ([stateManager canvasIsEditingPath]) {
             CLLocationCoordinate2D location= [mapView convertPoint:pixel_location toCoordinateFromView:self];
             [self addCoordinateToPath:location withGC:FALSE];
         }
@@ -520,21 +522,21 @@ void centerTextInContextAtOrigin(
     isBeingInteractedWith = FALSE;
     
     // If a path is being drawn when the touch ends, and the mode is distance find or area find
-    if (canvas_status!=1 && (mode==0 || mode==1)) {
+    if ([stateManager getCanvasStatus]!=1 && (mode==0 || mode==1)) {
         
         /* These lines of code ensure that, if the user does not select another point before clicking the button, then the path will resume exactly where the path left off */
         UITouch *touch = [touches anyObject];
         cursor_pixel = [touch locationInView:self];
         
         if ([user_defaults boolForKey:@"PauseDrawOnTouchUp"] == TRUE || y_offset != 0) {
-            canvas_status = 1;
+            [stateManager setCanvasStatus:1];
             [self mapRegionChanged];
         }
     }
     
     // If area is being found, and we're looking for a place to start a path or currently drawing a path
     // then calculate the area if the touch just ended
-    if (mode == 1 && (canvas_status == 1 || canvas_status == 2)) {
+    if (mode == 1 && ([stateManager getCanvasStatus] == 1 || [stateManager canvasIsEditingPath])) {
             [self calculateAreaThread];
     }
     
@@ -995,7 +997,7 @@ void centerTextInContextAtOrigin(
 /* This method is called when there is an offset and the user has tapped the canvas
  indicating that they want to start drawing the path, but the path has not yet been drawn. */
 - (void)configureCanvasForDrawing {
-    canvas_status = 1;
+    [stateManager setCanvasStatus:1];
     [self disableTutorialAnimations];
 	
 	NSInteger y_value= 36;
@@ -1029,7 +1031,7 @@ void centerTextInContextAtOrigin(
     }
 	
     [self setNeedsDisplay];
-	canvas_status = 1;
+    [stateManager setCanvasStatus:1];
     if (button_continue == nil) {
         button_continue= [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [button_continue setBackgroundColor:[UIColor whiteColor]];
@@ -1052,15 +1054,15 @@ void centerTextInContextAtOrigin(
     CGPoint pixel_location= cursor_pixel;
     pixel_location.y= pixel_location.y + y_offset;
     
-	if (canvas_status==1) {
-		canvas_status= 2;
+	if ([stateManager getCanvasStatus]==1) {
+        [stateManager setCanvasStatus:2];
 		CLLocationCoordinate2D location= [mapView convertPoint:pixel_location toCoordinateFromView:self];
 		first_pixel= pixel_location;
         [self addCoordinateToPath:location withGC:TRUE];
         return;
 	}
 	
-	if (canvas_status==2) {
+	if ([stateManager canvasIsEditingPath]) {
 		CLLocationCoordinate2D location= [mapView convertPoint:first_pixel toCoordinateFromView:self];
 		[self addCoordinateToPath:location withGC:TRUE];
         return;
@@ -1177,7 +1179,7 @@ void centerTextInContextAtOrigin(
 
 - (PixelLocation *)addPointToPathAtViewPoint:(CGPoint)point {
     
-    canvas_status = 2;
+    [stateManager setCanvasStatus:2];
     CLLocationCoordinate2D coord = [mapView convertPoint:point toCoordinateFromView:self];
     return [self addCoordinateToPath:coord withGC:TRUE];
 }

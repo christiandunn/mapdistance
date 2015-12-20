@@ -93,6 +93,7 @@
 		AAED131E14BD2E5500686A66 /* Move_Arrows_Deselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAED131614BD2E5500686A66 /* Move_Arrows_Deselected@2x.png */; };
 		AAED131F14BD2E5500686A66 /* Move_Arrows_Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = AAED131714BD2E5500686A66 /* Move_Arrows_Selected.png */; };
 		AAED132014BD2E5500686A66 /* Move_Arrows_Selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAED131814BD2E5500686A66 /* Move_Arrows_Selected@2x.png */; };
+		CC2F090C1C2625C500DDFB5E /* MapDistanceCanvasStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2F090B1C2625C500DDFB5E /* MapDistanceCanvasStateManager.m */; };
 		CC58F3D81962833E007D6789 /* MKCoordinateRegionWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CC58F3D71962833E007D6789 /* MKCoordinateRegionWrapper.m */; };
 		CCD5EB821980961F00F7C742 /* CMDGreatCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD5EB811980961F00F7C742 /* CMDGreatCircle.m */; };
 		CCD5EB891980991400F7C742 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCD5EB881980991400F7C742 /* XCTest.framework */; };
@@ -226,6 +227,8 @@
 		AAED131614BD2E5500686A66 /* Move_Arrows_Deselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Move_Arrows_Deselected@2x.png"; path = "Resources/Move_Arrows_Deselected@2x.png"; sourceTree = "<group>"; };
 		AAED131714BD2E5500686A66 /* Move_Arrows_Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Move_Arrows_Selected.png; path = Resources/Move_Arrows_Selected.png; sourceTree = "<group>"; };
 		AAED131814BD2E5500686A66 /* Move_Arrows_Selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Move_Arrows_Selected@2x.png"; path = "Resources/Move_Arrows_Selected@2x.png"; sourceTree = "<group>"; };
+		CC2F090A1C2625C500DDFB5E /* MapDistanceCanvasStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapDistanceCanvasStateManager.h; sourceTree = "<group>"; };
+		CC2F090B1C2625C500DDFB5E /* MapDistanceCanvasStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapDistanceCanvasStateManager.m; sourceTree = "<group>"; };
 		CC58F3D61962833E007D6789 /* MKCoordinateRegionWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKCoordinateRegionWrapper.h; sourceTree = "<group>"; };
 		CC58F3D71962833E007D6789 /* MKCoordinateRegionWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKCoordinateRegionWrapper.m; sourceTree = "<group>"; };
 		CCD5EB801980961F00F7C742 /* CMDGreatCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMDGreatCircle.h; sourceTree = "<group>"; };
@@ -372,6 +375,8 @@
 				AA5A9E6914A28F5E00453DE8 /* Types */,
 				AA03D59712BF0E0900927FCF /* MapDistanceCanvas.h */,
 				AA03D59812BF0E0900927FCF /* MapDistanceCanvas.m */,
+				CC2F090A1C2625C500DDFB5E /* MapDistanceCanvasStateManager.h */,
+				CC2F090B1C2625C500DDFB5E /* MapDistanceCanvasStateManager.m */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -701,6 +706,7 @@
 				AADEB5EE15F3B6CC0013966F /* MapDistanceModeSelectorView.m in Sources */,
 				AA9EFEB6168DD9ED00C3A076 /* MapDistanceLatlonView.m in Sources */,
 				AA9DEBF0168E8D8700D50178 /* MapDistancePersistentOverlayView.m in Sources */,
+				CC2F090C1C2625C500DDFB5E /* MapDistanceCanvasStateManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

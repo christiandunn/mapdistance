@@ -11,6 +11,7 @@
 #import "LabelWithAction.h"
 #import "CDVectorMath.h"
 #import "CMDGreatCircle.h"
+#import "MapDistanceCanvasStateManager.h"
 
 #define MAP_MARGIN 20
 
@@ -21,6 +22,7 @@ double calculateDistance(double lat1, double lon1, double lat2, double lon2);
 @interface MapDistanceCanvas : UIView <MKOverlay, UIAlertViewDelegate> {
 	
     /* State variables */
+    MapDistanceCanvasStateManager *stateManager;
     NSInteger y_offset;
     NSInteger map_moving;
     BOOL isAnimating;
@@ -30,11 +32,10 @@ double calculateDistance(double lat1, double lon1, double lat2, double lon2);
     NSInteger mode;
     /* Area find mode: 0 = Simplest (square pixels), 1 = Medium (convert to distance), 2 = High, 3 = Long (old style, using the flood fill method */
     NSInteger areaFindMode;
-    /* Canvas status: 0 = untouched, 1 = looking for a spot, 2 = full path */
-    NSInteger canvas_status;
     NSInteger measurementsCount;
     NSString *topBarString;
-    /* Tutorializing */
+    
+    /* Tutorial */
     UILabel *drawEnabledLabel;
     UIImageView *drawEnabledIcon;
     UIView *moveMapTutorialView;
