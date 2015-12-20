@@ -22,7 +22,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>net.cdunn.mapdistance</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleLocalizations</key>
@@ -42,6 +42,8 @@
 	<string>1.7.16</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationUsageDescription</key>
+	<string>It is easier to use this app if location access is enabled</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>It is easier to use this app if location access is enabled</string>
 	<key>NSMainNibFile</key>

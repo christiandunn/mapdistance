@@ -36,7 +36,7 @@
     [documentationCloseButton setTitle:NSLocalizedString(@"Close", @"") forState:UIControlStateNormal];
     NSString *filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"pathOnMapDistanceDocumentation.pdf"];;
     NSData *documentation = [NSData dataWithContentsOfFile:filePath];
-    [documentationWebView loadData:documentation MIMEType:@"application/pdf" textEncodingName:@"UTF8String" baseURL:nil];
+    [documentationWebView loadData:documentation MIMEType:@"application/pdf" textEncodingName:@"UTF8String" baseURL:[[NSBundle mainBundle] resourceURL]];
     
     NSString *versionString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     [versionLabel setText:[NSString stringWithFormat:@"%@", versionString]];
@@ -44,7 +44,7 @@
 
 - (void)closeButtonPressed {
     
-    [self dismissModalViewControllerAnimated:TRUE];
+    [self dismissViewControllerAnimated:TRUE completion:nil];
 }
 
 - (void)viewDidUnload

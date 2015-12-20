@@ -182,7 +182,7 @@
         }
         [areaLabel setAdjustsFontSizeToFitWidth:TRUE];
         [areaLabel setUserInteractionEnabled:TRUE];
-        [areaLabel setTextAlignment:UITextAlignmentCenter];
+        [areaLabel setTextAlignment:NSTextAlignmentCenter];
         [areaLabel setBackgroundColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0f]];
         [map_view addSubview:areaLabel];
         [map_view bringSubviewToFront:areaLabel];

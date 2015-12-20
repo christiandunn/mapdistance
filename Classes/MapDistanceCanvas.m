@@ -1008,8 +1008,8 @@ void centerTextInContextAtOrigin(
 	button_continue= [UIButton buttonWithType:UIButtonTypeRoundedRect];
     UILabel *buttonLabel = [button_continue titleLabel];
     [buttonLabel setNumberOfLines:0];
-    [buttonLabel setLineBreakMode:UILineBreakModeWordWrap];
-    [buttonLabel setTextAlignment:UITextAlignmentCenter];
+    [buttonLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    [buttonLabel setTextAlignment:NSTextAlignmentCenter];
 	[button_continue setFrame:CGRectMake(MAP_MARGIN, y_value, self.frame.size.width - (MAP_MARGIN * 2), 50)];
 	[button_continue setAlpha:0.750f];
     [button_continue setBackgroundColor:[UIColor whiteColor]];
@@ -1037,8 +1037,8 @@ void centerTextInContextAtOrigin(
         [button_continue setBackgroundColor:[UIColor whiteColor]];
         [button_continue setFrame:CGRectMake(MAP_MARGIN, MAP_MARGIN + HEIGHT_OF_DISTANCE_TEXT, self.frame.size.width - (2 * MAP_MARGIN), 100)];
         [button_continue setAlpha:0.750f];
-        [[button_continue titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
-        [[button_continue titleLabel] setTextAlignment:UITextAlignmentCenter];
+        [[button_continue titleLabel] setLineBreakMode:NSLineBreakByWordWrapping];
+        [[button_continue titleLabel] setTextAlignment:NSTextAlignmentCenter];
         [[button_continue titleLabel] setFont:[UIFont fontWithName:@"Helvetica" size:32.0f]];
         [button_continue setTitle:NSLocalizedString(@"Continue drawing the path on the map", @"...") forState:UIControlStateNormal];
         [button_continue addTarget:self action:@selector(mapRegionContinue) forControlEvents:UIControlEventTouchUpInside];

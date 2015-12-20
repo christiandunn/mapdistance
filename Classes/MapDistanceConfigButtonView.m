@@ -115,7 +115,7 @@
         automaticScrollSwitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 225, 215, 20)];
         automaticScrollSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(245, 220, 100, 20)];
         [automaticScrollSwitchLabel setFont:[UIFont fontWithName:@"Helvetica" size:15.0f]];
-        [automaticScrollSwitchLabel setTextAlignment:UITextAlignmentRight];
+        [automaticScrollSwitchLabel setTextAlignment:NSTextAlignmentRight];
         [automaticScrollSwitchLabel setText:NSLocalizedString(@"UseAutomaticScroll", @"")];
         [automaticScrollSwitchLabel setBackgroundColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.0f]];
         [automaticScrollSwitch setOn:useAutomaticScroll animated:FALSE];
@@ -126,7 +126,7 @@
         pauseDrawingOnTouchUpLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 264, 215, 20)];
         pauseDrawingOnTouchUpSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(245, 258, 100, 20)];
         [pauseDrawingOnTouchUpLabel setFont:[UIFont fontWithName:@"Helvetica" size:15.0f]];
-        [pauseDrawingOnTouchUpLabel setTextAlignment:UITextAlignmentRight];
+        [pauseDrawingOnTouchUpLabel setTextAlignment:NSTextAlignmentRight];
         [pauseDrawingOnTouchUpLabel setText:NSLocalizedString(@"PauseDrawingOnTouchUpLabel", @"")];
         [pauseDrawingOnTouchUpLabel setBackgroundColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.0f]];
         [pauseDrawingOnTouchUpSwitch setOn:pauseDrawOnTouchUp animated:FALSE];
@@ -201,7 +201,7 @@
 - (void)aboutButtonPressed {
     
     MapDistanceAboutViewController *avc = [[MapDistanceAboutViewController alloc] initWithNibName:@"MapDistanceAboutViewController" bundle:nil];
-    [view_controller presentModalViewController:avc animated:TRUE];
+    [view_controller presentViewController:avc animated:TRUE completion:nil];
     [view_controller infoButtonViewCloseButtonPressed];
 }
 

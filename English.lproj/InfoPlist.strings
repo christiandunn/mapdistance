@@ -1,2 +1,3 @@
 CFBundleDisplayName = "Distance/Area";
 NSLocationWhenInUseUsageDescription = "It is easier to use this app if location access is enabled";
+NSLocationUsageDescription = "It is easier to use this app if location access is enabled";

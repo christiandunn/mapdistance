@@ -34,7 +34,8 @@
     location_manager= [[CLLocationManager alloc] init];
     location_manager.delegate= self;
     if (language==nil) {
-        [location_manager setPurpose:@"Location data is not necessary, but is generally recommended for the best user experience when using this application"];
+        ;
+        //[location_manager setPurpose:@"Location data is not necessary, but is generally recommended for the best user experience when using this application"];
     }
     if (IS_OS_8_OR_LATER) {
         [location_manager requestWhenInUseAuthorization];
